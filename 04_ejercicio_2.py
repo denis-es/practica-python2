@@ -17,10 +17,8 @@ empleados = {
         
 
 
-class Empleado:
-    """Clase que implementa una lista con algunos métodos adicionales."""
-    def __init__(self, NIF,nombre,tipo_empleado,fecha_nacimiento,sueldo_mensual,ano_alta,complemento_anual):
-        """Inicializa una lista chachi con un mensaje descriptivo."""
+class Empleado:    
+    def __init__(self, NIF,nombre,tipo_empleado,fecha_nacimiento,sueldo_mensual,ano_alta,complemento_anual):        
         self.NIF = NIF
         self.nombre = nombre
         self.tipo_empleado = tipo_empleado
