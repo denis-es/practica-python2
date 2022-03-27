@@ -1,0 +1,128 @@
+menu = {            "(1)": "Añadir empleado",
+                     "(2)": "Borrar empleado",
+                     "(3)": "Mostrar lista empleados",
+                     "(4)": "Mostrar detalle de un empleado",
+                     "(5)": "Mostrar empleados cumpleaños",
+                     "(6)": "Terminar"}
+
+
+lista = ['Nombre:','NIF:','Fecha nacimiento:','Tipo:', 'Año de alta:', 'Sueldo base:','Complemento anual:']
+
+empleados = {
+            '32.234.234M': ('Pedro Rodríguez Martínez','32.234.234M','12/05/1985','fijo','2010','2000','200'),
+            '32.234.234V': ('José Martínez','32.234.234M','25/04/1995','temporal','2002','1800','400'),
+            '32.234.234X': ('Maria Angel','32.234.234M','24/03/1995','fijo','1999','1800','400')
+             }
+
+        
+
+
+
+
+def menu_opciones():    
+    print(" Menú de opciones")
+    for clave in menu:
+        print(clave, menu[clave])        
+    opc = int(input("Elige una opción: "))
+    opc2 = str(opc)
+    opc3 = str("(" + opc2 + ")")    
+    while not opc3 in menu:
+        print("Error, esta opción no existe.")
+        opc = int(input("Elige una opción: "))
+        opc2 = str(opc)
+        opc3 = str("(" + opc2 + ")")        
+    return opc
+
+def switch(case):
+    '''DEFINE LAS OPCIONES QUE EL USUARIO PODRÁ SELECCIONAR'''
+   if case == 1:
+       anadir_empleado_1()
+   
+   elif case == 2:
+       borrar_empleado_2()
+
+   elif case == 3:
+       listar_empleado_3()
+
+   elif case == 4:
+       mostrar_empleado_4()      
+
+   elif case == 5:
+       empleado_cumple5()
+
+
+def anadir_empleado_1():
+    '''DEFINE LA FUNCION PARA AÑADIR NUEVO EMPLEADO'''
+    print("Introduce los datos del empleado:")    
+    tipo_empleado = str(input("Tipo de empleado: "))
+    nombre = str(input("Introduce el nombre: "))
+    NIF = str(input("Introduce el nif: "))
+    fecha_nacimiento = str(input("Introduce la fecha de nacimiento(dd/mm/aaaa): "))
+
+    if (tipo_empleado == 'fijo'):           
+        sueldo_base_mensual = float(input("Introduce el sueldo base mensual: "))
+        ano_alta = int(input("Introduce el año de alta en la empresa: "))
+        complemento_anual = float(input("Introduce el complemento anual: "))
+        
+    if (tipo_empleado == 'temporal'):
+        sueldo_base_mensual = float(input("Introduce el sueldo mensual: "))
+        fecha_alta = str(input("Introduce la fecha de alta (dd/mm/aaaa): "))
+        fecha_baja = str(input("Introduce la fecha de baja (dd/mm/aaaa): "))
+        
+    persona1 = Empleado(NIF,nombre,tipo_empleado,fecha_nacimiento,sueldo_base_mensual,ano_alta,complemento_anual)
+    persona1.ANADIR()
+    print(".")
+
+def borrar_empleado_2():
+    '''DEFINE LA FUNCION PARA BORRAR UN EMPLEADO'''
+    NIF = input("Introduce el nif del empleado que quieres borrar: ")
+    while not NIF in empleados:        
+        NIF = input("No existe este NIF, introduce el NIF correcto: ")
+    del empleados[NIF]
+    print(".")
+
+def listar_empleado_3():
+    '''DEFINE LA FUNCION PARA LISTAR LAS INFORMACIONES DE TODOS EMPLEADOS'''
+    print("")
+    for clave in empleados:
+        print(clave, empleados[clave][0],"-",empleados[clave][3])
+    print(".")
+
+def mostrar_empleado_4():
+    '''DEFINE LA FUNCION PARA LISTAR LAS INFORMACIONES DE UN EMPLEADO'''
+    NIF = str(input("Introduce el nif del empleado: "))
+    print("")
+    e = 0
+    for x in lista:
+        print(x,empleados[NIF][e])
+        e = e + 1    
+    print(".")
+
+def empleado_cumple5():
+    '''DEFINE LA FUNCION PARA LISTAR LOS NOMBRES DE LOS EMPLEADOS QUE ESTAN DE CUMPLEAÑOS'''
+    mes = int(input("Introduce un mes (1 - 12): "))
+    print("")
+    print("Estan de cumpleaños:")
+    for clave in empleados:
+        txt = empleados[clave][2]
+        x = txt.split("/")
+        x = int(x[1])
+        if (x == mes):
+            print(empleados[clave][0],empleados[clave][2])            
+    print(".")
+
+def main():
+    '''FUNCION PRINCIPAL'''
+
+    loop = 0
+    while loop != 6:
+        opcion = menu_opciones()
+        switch(opcion)        
+        loop = opcion
+    
+if __name__ == "__main__":
+    main()
+
+
+
+
